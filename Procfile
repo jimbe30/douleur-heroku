@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/douleur-spring-rest-1.0.jar -Dserver.port=$PORT $JAR_OPTS "--app.context=heroku" "--spring.profiles.active=test"
+web: java $JAVA_OPTS -jar target/douleur-spring-rest-1.0.jar -Dserver.port=$PORT $JAR_OPTS

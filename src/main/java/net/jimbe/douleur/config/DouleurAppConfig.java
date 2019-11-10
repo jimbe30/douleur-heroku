@@ -18,7 +18,7 @@ public class DouleurAppConfig {
 	@Autowired
 	private Environment env;
 
-	@Value("${app.context}")
+//	@Value("${app.context}")
 	private String appContext;
 
 	private Logger logger = Logger.getLogger(getClass().getName());
