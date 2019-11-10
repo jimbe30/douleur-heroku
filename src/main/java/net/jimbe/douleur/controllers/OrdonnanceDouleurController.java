@@ -14,7 +14,7 @@ import net.jimbe.douleur.entity.Nomenclature;
 import net.jimbe.douleur.services.ServiceDouleur;
 
 @RestController
-@RequestMapping("/douleurs")
+@RequestMapping("/ordonnances")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class OrdonnanceDouleurController {
 	
@@ -27,11 +27,6 @@ public class OrdonnanceDouleurController {
 	public List<Nomenclature> getNomenclatureDouleur() {
 		List<Nomenclature> nomenclatures = nomenclatureRepository.findByNomenclatureParentIsNull();
 		return nomenclatures;
-	}
-	
-	@RequestMapping("/test")
-	public Prescription test() {
-		return new Prescription();
 	}
 	
 	@RequestMapping("/{idDouleur}")
