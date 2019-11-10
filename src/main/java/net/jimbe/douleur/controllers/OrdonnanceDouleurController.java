@@ -29,6 +29,11 @@ public class OrdonnanceDouleurController {
 		return nomenclatures;
 	}
 	
+	@RequestMapping("/test")
+	public Prescription test() {
+		return new Prescription();
+	}
+	
 	@RequestMapping("/{idDouleur}")
 	public List<Prescription> getFicheDouleur(@PathVariable int idDouleur) {
 		List<Prescription> presciptions = serviceDouleur.getPrescriptionsProposees(idDouleur);
