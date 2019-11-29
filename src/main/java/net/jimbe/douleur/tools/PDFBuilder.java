@@ -12,9 +12,6 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
-import java.util.Map;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLHandshakeException;
@@ -33,9 +30,7 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.text.PDFTextStripper;
-import org.hibernate.validator.internal.util.privilegedactions.GetClassLoader;
 
-import net.jimbe.douleur.beans.Dispensation;
 import net.jimbe.douleur.beans.OrdonnanceForm;
 
 public class PDFBuilder {
@@ -305,9 +300,14 @@ public class PDFBuilder {
 
 		// Saving the document
 		File outputFile = new File(targetName);
-		URL urlDirOut = PDFBuilder.class.getResource(outputFile.getParent().replace(File.separator, "/"));
-		outputFile = new File(urlDirOut.getFile(), outputFile.getName());
-		document.save(outputFile);
+		outputFile.getParentFile().getCanonicalFile().mkdirs();
+		try {
+			document.save(outputFile);
+		} catch (Exception e) {
+			e.printStackTrace();
+			outputFile = new File(outputFile.getName());
+			document.save(outputFile.getName());
+		}
 
 		PDFTextStripper pdfStripper = new PDFTextStripper();
 		// Retrieving text from PDF document
