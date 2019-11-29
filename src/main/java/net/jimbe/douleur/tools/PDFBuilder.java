@@ -33,6 +33,7 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.text.PDFTextStripper;
+import org.hibernate.validator.internal.util.privilegedactions.GetClassLoader;
 
 import net.jimbe.douleur.beans.Dispensation;
 import net.jimbe.douleur.beans.OrdonnanceForm;
@@ -55,7 +56,7 @@ public class PDFBuilder {
 			KeyStoreException, URISyntaxException {
 		InputStream input = null;
 
-		urlInput = ClassLoader.getSystemResource(srcLocation);
+		urlInput = getClass().getResource(srcLocation);
 		if (urlInput == null) {
 			urlInput = new URL(srcLocation);
 		}
@@ -304,7 +305,7 @@ public class PDFBuilder {
 
 		// Saving the document
 		File outputFile = new File(targetName);
-		URL urlDirOut = ClassLoader.getSystemResource(outputFile.getParent().replace(File.separator, "/"));
+		URL urlDirOut = PDFBuilder.class.getResource(outputFile.getParent().replace(File.separator, "/"));
 		outputFile = new File(urlDirOut.getFile(), outputFile.getName());
 		document.save(outputFile);
 
