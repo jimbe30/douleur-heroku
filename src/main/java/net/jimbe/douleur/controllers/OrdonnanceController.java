@@ -26,31 +26,8 @@ public class OrdonnanceController {
 	@Autowired
 	ServiceDouleur serviceDouleur;
 
-//	@RequestMapping(method = RequestMethod.POST, path = "/nouvelle", consumes = "application/json")
-//	public ResponseEntity<byte[]> faireOrdonnance(@Valid @RequestBody OrdonnanceForm ordonnance) {
-//
-//		String ordonnanceModeleName = "/resources/modeles/ordonnance_modele.pdf";
-//		String targetName = "output/ordonnance_emise.pdf";
-//		byte[] contents = new byte[0];
-//		try {
-//			contents = PDFBuilder.editOrdonnancePDF(ordonnanceModeleName, targetName, ordonnance);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			throw new RuntimeException("Service indisponible : impossible d'éditer l'ordonnance. Veuillez recommencer ultérieurement");
-//		}
-//
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.setContentType(MediaType.APPLICATION_PDF);
-//
-//		String filename = "ordonnance.pdf";
-//		headers.setContentDispositionFormData(filename, filename);
-//		headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-//		ResponseEntity<byte[]> response = new ResponseEntity<>(contents, headers, HttpStatus.OK);
-//		return response;
-//
-//	}
-	
-	@RequestMapping(method = RequestMethod.POST, path = "/nouvelle", consumes = "application/json", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+
+	@RequestMapping(method = RequestMethod.POST, path = "/nouvelle", consumes = "application/json", produces=MediaType.TEXT_HTML_VALUE)
 	public String faireOrdonnance(@Valid @RequestBody OrdonnanceForm ordonnance) {
 
 		String ordonnanceModeleName = "/resources/modeles/ordonnance_modele.pdf";
@@ -61,13 +38,10 @@ public class OrdonnanceController {
 			e.printStackTrace();
 			throw new RuntimeException("Service indisponible : impossible d'éditer l'ordonnance. Veuillez recommencer ultérieurement");
 		}
-
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_PDF);
-
 		String idOrdonnance = "ordonnance_emise.pdf";		
 		return idOrdonnance;
-
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/emises/{idOrdonnance}")
@@ -88,7 +62,6 @@ public class OrdonnanceController {
 		headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
 		ResponseEntity<byte[]> response = new ResponseEntity<>(contents, headers, HttpStatus.OK);
 		return response;
-
 	}
 	
 
